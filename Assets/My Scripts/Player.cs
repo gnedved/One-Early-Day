@@ -24,6 +24,16 @@ public class Player : MonoBehaviour
 		newRot.y = 0.0f;
 		transform.rotation = Quaternion.Slerp(transform.rotation, newRot, Time.deltaTime * rotateSpeed);
 
+		if(Input.GetButtonDown("Fire1"))
+		{
+			gameObject.transform.GetChild(0).gameObject.SetActive(true);
+		}
+
+		if(Input.GetButtonDown("Fire2"))
+		{
+			gameObject.transform.GetChild(0).gameObject.SetActive(false);
+		}
+
 		if(Input.GetKey(KeyCode.W))
 		{
 			//rigidbody.angularVelocity = lockVector;
@@ -51,6 +61,7 @@ public class Player : MonoBehaviour
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
 			rigidbody.velocity = Vector3.right * playerSpeed;
 		}
+
 	}
 
 }
