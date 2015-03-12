@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SecurityCamera : MonoBehaviour
+public class SecurityCameraXZ : MonoBehaviour
 {
 	public GameObject playerObject;
 	private GameObject leftEndPoint;
@@ -73,8 +73,8 @@ public class SecurityCamera : MonoBehaviour
 		// Raycast from LeftEndpoint to RightEndPoint and see if player is detected
 		float Area = .5f * (-point2.y * point3.x + point1.y * (-point2.x + point3.x) + point1.x * (point2.y - point3.y) + point2.x * point3.y);
 		float sign = Area < 0 ? -1 : 1;
-		float s = (point1.y * point3.x - point1.x * point3.y + (point3.y - point1.y) * player.x + (point1.x - point3.x) * player.y) * sign;
-		float t = (point1.x * point2.y - point1.y * point2.x + (point1.y - point2.y) * player.x + (point2.x - point1.x) * player.y) * sign;
+		float s = (point1.y * point3.x - point1.x * point3.y + (point3.y - point1.y) * player.x + (point1.x - point3.x) * player.z) * sign;
+		float t = (point1.x * point2.z - point1.y * point2.x + (point1.y - point2.y) * player.x + (point2.x - point1.x) * player.z) * sign;
 		
 		//print ("Area: " + Area + ", sign: " + sign + ", s: " + s + ", t: " + t);
 

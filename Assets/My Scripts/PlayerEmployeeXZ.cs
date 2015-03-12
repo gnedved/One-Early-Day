@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
+public class PlayerEmployeeXZ : MonoBehaviour
 {
 
 	private float lockPosition = 0.0f;
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 		Vector3 tempVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Quaternion newRot = Quaternion.LookRotation(transform.position - tempVec, Vector3.forward);
 		newRot.x = 0.0f;
-		newRot.y = 0.0f;
+		newRot.z = 0.0f;
 		transform.rotation = Quaternion.Slerp(transform.rotation, newRot, Time.deltaTime * rotateSpeed);
 
 		if(Input.GetButtonDown("Fire1"))
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 		if(Input.GetKey(KeyCode.W))
 		{
 			//rigidbody.angularVelocity = lockVector;
-			rigidbody.velocity = Vector3.up * playerSpeed;
+			rigidbody.velocity = Vector3.forward * playerSpeed;
 		}
 		else
 		{
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 		if(Input.GetKey (KeyCode.S))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
-			rigidbody.velocity = Vector3.down * playerSpeed;
+			rigidbody.velocity = Vector3.back * playerSpeed;
 		}
 
 		if(Input.GetKey(KeyCode.D))
