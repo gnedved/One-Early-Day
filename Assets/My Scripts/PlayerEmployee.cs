@@ -37,29 +37,29 @@ public class PlayerEmployee : MonoBehaviour
 		if(Input.GetKey(KeyCode.W))
 		{
 			//rigidbody.angularVelocity = lockVector;
-			rigidbody.velocity = Vector3.up * playerSpeed;
+			GetComponent<Rigidbody>().velocity = Vector3.up * playerSpeed;
 		}
 		else
 		{
-			rigidbody.velocity = lockVector;
+			GetComponent<Rigidbody>().velocity = lockVector;
 		}
 
 		if(Input.GetKey(KeyCode.A))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
-			rigidbody.velocity = Vector3.left * playerSpeed;
+			GetComponent<Rigidbody>().velocity = Vector3.left * playerSpeed;
 		}
 
 		if(Input.GetKey (KeyCode.S))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
-			rigidbody.velocity = Vector3.down * playerSpeed;
+			GetComponent<Rigidbody>().velocity = Vector3.down * playerSpeed;
 		}
 
 		if(Input.GetKey(KeyCode.D))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
-			rigidbody.velocity = Vector3.right * playerSpeed;
+			GetComponent<Rigidbody>().velocity = Vector3.right * playerSpeed;
 		}
 
 	}
