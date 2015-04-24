@@ -11,9 +11,12 @@ public class PlayerEmployee : MonoBehaviour
 	public float mouseZ = 0.0f;
 	private Vector3 lockVector;
 
+    Animator playerAnim;
+
 	void Start ()
 	{
 		lockVector =  new Vector3(lockPosition, lockPosition, lockPosition);
+        playerAnim = transform.GetComponent<Animator>();
 	}
 	
 	void Update ()
@@ -26,41 +29,53 @@ public class PlayerEmployee : MonoBehaviour
 
 		if(Input.GetButtonDown("Fire1"))
 		{
-			gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            if (playerAnim.GetBool("Switch"))
+            {
+                playerAnim.SetBool("RightPunch", true);
+                playerAnim.SetBool("Switch", false);
+            }
+            else
+            {
+                playerAnim.SetBool("LeftPunch", true);
+                playerAnim.SetBool("Switch", true);
+            }
+			//gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		}
-
-		if(Input.GetButtonDown("Fire2"))
-		{
-			gameObject.transform.GetChild(0).gameObject.SetActive(false);
-		}
+        else
+        {
+            playerAnim.SetBool("RightPunch", false);
+            playerAnim.SetBool("LeftPunch", false);
+        }
 
 		if(Input.GetKey(KeyCode.W))
 		{
 			//rigidbody.angularVelocity = lockVector;
+            playerAnim.SetBool("Moving", true);
 			GetComponent<Rigidbody>().velocity = Vector3.up * playerSpeed;
 		}
-		else
-		{
-			GetComponent<Rigidbody>().velocity = lockVector;
-		}
-
-		if(Input.GetKey(KeyCode.A))
+		else if(Input.GetKey(KeyCode.A))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
+            playerAnim.SetBool("Moving", true);
 			GetComponent<Rigidbody>().velocity = Vector3.left * playerSpeed;
 		}
-
-		if(Input.GetKey (KeyCode.S))
+		else if(Input.GetKey (KeyCode.S))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
+            playerAnim.SetBool("Moving", true);
 			GetComponent<Rigidbody>().velocity = Vector3.down * playerSpeed;
 		}
-
-		if(Input.GetKey(KeyCode.D))
+		else if(Input.GetKey(KeyCode.D))
 		{
 			//rigidbody.angularVelocity = new Vector3(lockPosition, lockPosition, lockPosition);
+            playerAnim.SetBool("Moving", true);
 			GetComponent<Rigidbody>().velocity = Vector3.right * playerSpeed;
 		}
+        else
+        {
+            playerAnim.SetBool("Moving", false);
+            GetComponent<Rigidbody>().velocity = lockVector;
+        }
 
 	}
 

@@ -21,7 +21,7 @@ public class ClickToMove : MonoBehaviour{
 		
 			var goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			if (agent.SetDestination(goal) == true){
-				Debug.Log("On my way...");
+                //Debug.Log(agent.remainingDistance);
 			} else {
 				Debug.Log("Goal is blocked or is outside of the navigation map. If you want me to go as closer as I can, enable 'Closer Point On Invalid' in my inspector");
 			}
