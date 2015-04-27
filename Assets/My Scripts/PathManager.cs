@@ -21,7 +21,7 @@ public class PathManager : MonoBehaviour
 
     public GameObject GetNextNode(GameObject currentNode, GameObject currentPath)
     {
-        return currentPath.GetComponent<Path>().GetNextNode(currentNode);
+        return currentPath.GetComponent<PathObject>().GetNextNode(currentNode);
     }
     
 }

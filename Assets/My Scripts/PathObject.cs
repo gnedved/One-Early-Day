@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Path : MonoBehaviour
+public class PathObject : MonoBehaviour
 {
 	List <GameObject> Nodes = new List<GameObject>();
 	private int nodes = 0;
