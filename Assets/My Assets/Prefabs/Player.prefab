@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2397132}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ GameObject:
   - 23: {fileID: 2348094}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ GameObject:
   - 23: {fileID: 2361610}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ GameObject:
   - 23: {fileID: 2344992}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ GameObject:
   - 23: {fileID: 2360646}
   m_Layer: 0
   m_Name: RightLeg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - 23: {fileID: 2365756}
   m_Layer: 0
   m_Name: LeftLeg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ GameObject:
   - 4: {fileID: 465934}
   m_Layer: 0
   m_Name: RightArm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,7 @@ GameObject:
   - 23: {fileID: 2347778}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   - 4: {fileID: 481368}
   m_Layer: 0
   m_Name: LeftArm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - 23: {fileID: 2380074}
   m_Layer: 0
   m_Name: Punch
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,8 +204,8 @@ GameObject:
   - 65: {fileID: 6581058}
   - 23: {fileID: 2364464}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Chest
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ Transform:
   m_LocalScale: {x: .971810222, y: .97181052, z: .97181052}
   m_Children: []
   m_Father: {fileID: 425088}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &416322
 Transform:
   m_ObjectHideFlags: 1
@@ -233,7 +233,7 @@ Transform:
   m_LocalScale: {x: 1, y: .430394381, z: 1}
   m_Children: []
   m_Father: {fileID: 425088}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &425088
 Transform:
   m_ObjectHideFlags: 1
@@ -246,11 +246,11 @@ Transform:
   m_Children:
   - {fileID: 453642}
   - {fileID: 478510}
+  - {fileID: 442268}
   - {fileID: 413956}
   - {fileID: 416322}
   - {fileID: 481368}
   - {fileID: 465934}
-  - {fileID: 442268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &434552
@@ -276,7 +276,7 @@ Transform:
   m_LocalScale: {x: .139827818, y: .288124144, z: .503212214}
   m_Children: []
   m_Father: {fileID: 425088}
-  m_RootOrder: 6
+  m_RootOrder: 2
 --- !u!4 &453642
 Transform:
   m_ObjectHideFlags: 1
@@ -314,7 +314,7 @@ Transform:
   - {fileID: 434552}
   - {fileID: 495562}
   m_Father: {fileID: 425088}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &472398
 Transform:
   m_ObjectHideFlags: 1
@@ -352,7 +352,7 @@ Transform:
   - {fileID: 465822}
   - {fileID: 472398}
   m_Father: {fileID: 425088}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &495562
 Transform:
   m_ObjectHideFlags: 1
@@ -727,6 +727,7 @@ MonoBehaviour:
   playerSpeed: 10
   rotateSpeed: 30
   mouseZ: 0
+  disableTarget: 0
 --- !u!135 &13518878
 SphereCollider:
   m_ObjectHideFlags: 1

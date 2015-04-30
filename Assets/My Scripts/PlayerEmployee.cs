@@ -10,6 +10,7 @@ public class PlayerEmployee : MonoBehaviour
 	public float rotateSpeed = 30.0f;
 	public float mouseZ = 0.0f;
 	private Vector3 lockVector;
+    public bool disableTarget = false;
 
     Animator playerAnim;
 
@@ -29,7 +30,8 @@ public class PlayerEmployee : MonoBehaviour
 
 		if(Input.GetButtonDown("Fire1"))
 		{
-            if (playerAnim.GetBool("Switch"))
+            disableTarget = true;
+            /*if (playerAnim.GetBool("Switch"))
             {
                 playerAnim.SetBool("RightPunch", true);
                 playerAnim.SetBool("Switch", false);
@@ -38,13 +40,14 @@ public class PlayerEmployee : MonoBehaviour
             {
                 playerAnim.SetBool("LeftPunch", true);
                 playerAnim.SetBool("Switch", true);
-            }
+            }*/
 			//gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		}
         else
         {
             playerAnim.SetBool("RightPunch", false);
             playerAnim.SetBool("LeftPunch", false);
+            disableTarget = false;
         }
 
 		if(Input.GetKey(KeyCode.W))

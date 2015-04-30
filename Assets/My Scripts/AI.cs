@@ -5,9 +5,12 @@ using System.Collections;
 public class AI : MonoBehaviour
 {
     public GameObject pathManager;
+    private GameController gameController;
     private PathManager pathManagerScript;
     //private bool patrolling, roaming, idle, nodeReached;
-    public float fieldOfViewAngle = 100.0f;
+    public float fieldOfViewAngle = 110.0f;
+    public float disableTimer = 10.0f;
+    public float disableStart = 0.0f;
     private bool nodeReached;
     private bool playerInSight;
     private GameObject activePath;
@@ -46,11 +49,12 @@ public class AI : MonoBehaviour
     {
         leftEndPoint = transform.GetChild(0).gameObject;
         rightEndPoint = transform.GetChild(1).gameObject;
-        playerObject = GameObject.FindWithTag("Player");
+        playerObject = GameObject.Find("Player");
         pathManager = GameObject.Find("PathManager");
         pathManagerScript = pathManager.GetComponent<PathManager>();
         robotCollider = GetComponent<CircleCollider2D>();
         nodeReached = false;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 	}
 	
 
@@ -61,10 +65,16 @@ public class AI : MonoBehaviour
         Vector3 point2 = leftEndPoint.transform.position;
         Vector3 point3 = rightEndPoint.transform.position;
 
+        /*if (gameController.playerPosition != gameController.resetPosition)
+        {
+            playerPoint = gameController.playerPosition;
+            currentStatus = ActivityStatus.Chasing;
+        }*/
 
         if (currentStatus == ActivityStatus.Disabled)
         {
             //Robot is deactivated, not sure if for period of time or permanent
+            Disabled();
         }
         else if (currentStatus == ActivityStatus.Stand)
         {
@@ -76,7 +86,12 @@ public class AI : MonoBehaviour
         }
         else if (currentStatus == ActivityStatus.Idle)
         {
-            currentNode = FindNearestPath();
+            GameObject tempNode = FindNearestPath();
+            Debug.Log("TempNode: " + tempNode.name);
+            if (tempNode != null)
+            {
+                currentNode = tempNode;
+            }
             activePath = currentNode.transform.parent.gameObject;
             agent.SetDestination(currentNode.transform.position);
             currentStatus = ActivityStatus.Patrolling;
@@ -131,6 +146,21 @@ public class AI : MonoBehaviour
         return closestNode;
     }
 
+    void Disabled()
+    {
+        if (Time.time > (disableStart + disableTimer))
+        {
+            currentStatus = ActivityStatus.Idle;
+        }
+    }
+
+    public void disableStatus()
+    {
+        currentStatus = ActivityStatus.Disabled;
+        disableStart = Time.time;
+        agent.Stop();
+    }
+
     void Patrolling()
     {
         GameObject nextNode = pathManagerScript.GetNextNode(currentNode, activePath);
@@ -169,14 +199,14 @@ public class AI : MonoBehaviour
         if (currentStatus == ActivityStatus.Patrolling)
         {
             //Wait 5 seconds
-            StartCoroutine(WaitForTime(5f));
+            //StartCoroutine(WaitForTime(5f));
             nodeReached = true;
         }
         else if (currentStatus == ActivityStatus.Investigating)
         {
             // Investigation point reached
             print("Investigation Dest Reached");
-            StartCoroutine(WaitForTime(5.0f));
+            //StartCoroutine(WaitForTime(5.0f));
             currentStatus = ActivityStatus.Idle;
             print("Post Coroutine Investigation");
         }
@@ -187,7 +217,7 @@ public class AI : MonoBehaviour
             if (!playerInSight)
             {
                 currentStatus = ActivityStatus.Investigating;
-                StartCoroutine(WaitForTime(5.0f));
+                //StartCoroutine(WaitForTime(5.0f));
                 currentStatus = ActivityStatus.Idle;
             }
         }
@@ -222,8 +252,8 @@ public class AI : MonoBehaviour
     {
         // Create a vector from the enemy to the player and store the angle between it and forward.
         Vector3 direction = playerPosition - transform.position;
-        float angle = Vector2.Angle(direction, transform.up);
-        Debug.DrawLine(transform.position + transform.up, direction);
+        float angle = Vector3.Angle(direction, transform.up);
+        //Debug.DrawLine(transform.position + transform.up, direction, Color.green, 1.0f, false);
 
         // If the angle between forward and where the player is, is less than half the angle of view...
         if (angle < fieldOfViewAngle * 0.5f)
@@ -238,13 +268,14 @@ public class AI : MonoBehaviour
                 {
                     // ... the player is in sight.
                     playerInSight = true;
-                    return true;
                     // Set the last global sighting is the players current position.
-                    //lastPlayerSighting.position = player.transform.position;
+                    gameController.playerPosition = playerPosition;
+                    return true;
                 }
             }
         }
         playerInSight = false;
+        gameController.playerPosition = gameController.resetPosition;
         return false;
     }
 
